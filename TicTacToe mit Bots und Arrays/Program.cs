@@ -408,248 +408,57 @@ namespace TicTacToeMitBot
 
         static void ZugDesBots()
         {
+            //1. Hier wird geschaut, ob der Bot im aktuellen Spielzug gewinnen könnte:
+            //wenn ja, wird ein Sieg des Bots ausgerufen und das Spiel ist zu Ende
 
-
-            if (f1 == " ")
+            for(int zeile = 0; zeile <= 3; zeile++)
             {
-                f1 = botSymbol;
-                SiegueberpruefungBot();
-                f1 = " ";
-            }
-
-            if (f2 == " ")
-            {
-                f2 = botSymbol;
-                SiegueberpruefungBot();
-                f2 = " ";
-            }
-
-            if (f3 == " ")
-            {
-                f3 = botSymbol;
-                SiegueberpruefungBot();
-                f3 = " ";
-            }
-
-            if (f4 == " ")
-            {
-                f4 = botSymbol;
-                SiegueberpruefungBot();
-                f4 = " ";
-            }
-
-            if (f5 == " ")
-            {
-                f5 = botSymbol;
-                SiegueberpruefungBot();
-                f5 = " ";
-            }
-
-            if (f6 == " ")
-            {
-                f6 = botSymbol;
-                SiegueberpruefungBot();
-                f6 = " ";
-            }
-
-            if (f7 == " ")
-            {
-                f7 = botSymbol;
-                SiegueberpruefungBot();
-                f7 = " ";
-            }
-
-            if (f8 == " ")
-            {
-                f8 = botSymbol;
-                SiegueberpruefungBot();
-                f8 = " ";
-            }
-
-            if (f9 == " ")
-            {
-                f9 = botSymbol;
-                SiegueberpruefungBot();
-                f9 = " ";
-            }
-
-
-
-            //ab hier Überprüfung, ob der Nutzer im nächsten Zug gewinnen könnte
-
-
-
-            if (f1 == " ")
-            {
-                f1 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
+                for(int spalte = 0; spalte <= 3; spalte++)
                 {
-                    f1 = botSymbol;
-                    Debug2("1");
-                    return;
-
+                    if (felder[spalte, zeile] == " ")
+                    {
+                        felder[spalte, zeile] = botSymbol;
+                        PruefeSiegmöglichkeit();
+                        if(siegLiegtVor == true)
+                        {
+                            SiegDesBots();
+                        }
+                        else
+                        {
+                            felder[spalte, zeile] = " ";
+                        }
+                    }
                 }
-                else
-                {
-                    f1 = " ";
+                
+            }
 
+            //2. Wenn 1. nicht erfolgreich wird hier geprüft, ob der Gegenspieler im nächsten Zug gewinnen könnte:
+            //Wenn ja wird in das entsprechende Feld vom Bot das BotSymbol gesetzt, um den Sieg des Nutzers im nächsten Zug verhindern
+
+            for (int zeile = 0; zeile <= 3; zeile++)
+            {
+                for (int spalte = 0; spalte <= 3; spalte++)
+                {
+                    if (felder[spalte, zeile] == " ")
+                    {
+                        felder[spalte, zeile] = spielerSymbol;
+                        PruefeSiegmöglichkeit();
+                        if (siegLiegtVor == true)
+                        {
+                            felder[spalte, zeile] = botSymbol;
+                            return;
+                        }
+                        else
+                        {
+                            felder[spalte, zeile] = " ";
+                        }
+                    }
                 }
 
             }
 
-            if (f2 == " ")
-            {
-                f2 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
-                {
-                    f2 = botSymbol;
-                    Debug2("2");
-                    return;
+            // 3.
 
-                }
-                else
-                {
-                    f2 = " ";
-                }
-
-            }
-
-            if (f3 == " ")
-            {
-                f3 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
-                {
-                    f3 = botSymbol;
-                    Debug2("3");
-                    return;
-                }
-                else
-                {
-                    f3 = " ";
-                }
-
-            }
-
-            if (f4 == " ")
-            {
-                f4 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
-                {
-                    f4 = botSymbol;
-                    Debug2("4");
-                    return;
-                }
-                else
-                {
-                    f4 = " ";
-                }
-
-            }
-
-
-
-            if (f5 == " ")
-            {
-                f5 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
-                {
-                    f5 = botSymbol;
-                    Debug2("5");
-                    return;
-                }
-                else
-                {
-                    f5 = " ";
-                }
-
-            }
-
-
-
-
-            if (f6 == " ")
-            {
-                f6 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
-                {
-                    f6 = botSymbol;
-                    Debug2("6");
-                    return;
-                }
-                else
-                {
-                    f6 = " ";
-                }
-
-            }
-
-
-
-            if (f7 == " ")
-            {
-                f7 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
-                {
-                    f7 = botSymbol;
-                    Debug2("7");
-                    return;
-                }
-                else
-                {
-                    f7 = " ";
-                }
-
-            }
-
-
-
-            if (f8 == " ")
-            {
-                f8 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
-                {
-                    f8 = botSymbol;
-                    Debug2("8");
-                    return;
-                }
-                else
-                {
-                    f8 = " ";
-                }
-
-            }
-
-
-            if (f9 == " ")
-            {
-                f9 = spielerSymbol;
-                PruefeSiegmöglichkeit();
-                if (siegLiegtVor == true)
-                {
-                    f9 = botSymbol;
-                    Debug2("9");
-                    return;
-                }
-                else
-                {
-                    f9 = " ";
-                }
-
-            }
-
-
-            ZeichenInZufaelligesFreiesFeld();//setzt das Zeichen des Bots in zufälliges freies Feld, wenn oben aufgeführten Methoden erfolglos sind
-
-
-            
 
         }
 
@@ -689,10 +498,18 @@ namespace TicTacToeMitBot
             Console.WriteLine("║                                                                                           ║");
         }
 
-        
-
 
 
     }
 
+        
+
+        
+
+        
+
+
+
 }
+
+
