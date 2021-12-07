@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>TicTacToe_mit_Bots_und_Arrays</RootNamespace>
+    <StartupObject>TicTacToeMitBot.Program</StartupObject>
   </PropertyGroup>
 
 </Project>
