@@ -100,7 +100,7 @@ namespace TicTacToeMitBot
             siegLiegtVor = false; //setzt Variable siegLiegtVor vor dem Ausführen der Überprüfung zurück
 
             //prüft ob entlang der ZEILEN im Spielfeld alle 3 eingesetzten Zeichen gleich sind:
-            for (int z = 0; 3 <= 3; z++) 
+            for (int z = 0; z <= 3; z++) 
             {
                 if (felder[z,0] == felder[z,1] && felder[z,1] == felder[z,2] && felder[z,1] != " ")
                 {
@@ -109,7 +109,7 @@ namespace TicTacToeMitBot
             }
 
             //prüft ob entlang der SPALTEN im Spielfeld alle 3 eingesetzten Zeichen gleich sind:
-            for (int s = 0; 3 <= 3; s++) 
+            for (int s = 0; s <= 3; s++) 
             {
                 if (felder[0,s] == felder[1,s]  && felder[1,s] == felder[2,s] && felder[0,s] != " ")
                 {
@@ -153,6 +153,9 @@ namespace TicTacToeMitBot
                     Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════════════╝");
                     Environment.Exit(0);
                     break;
+                case "bugfix":
+                    debuggingAn = true;
+                    break;
                 default:
                     Console.WriteLine("╠═══════════════════════════════════════════════════════════════════════════════════════════╣");
                     Console.WriteLine("║ Was gibst du da von dir? Antworte gefälligst venünftig!                                   ║");
@@ -162,7 +165,7 @@ namespace TicTacToeMitBot
 
             }
         }//fragt den Spieler beim Spielstart ob er wirklich gegen den Bot antreten möchte
-                               //Außerdem ist hier auch eine versteckte Funktion zum Aktivieren der Debug-Nachrichten implementiert
+                               //Außerdem ist hier auch eine versteckte Funktion zum Aktivieren der Debug-Nachrichten über die Konsole implementiert
 
         static void DuOderIch() 
         {
@@ -421,6 +424,7 @@ namespace TicTacToeMitBot
                         PruefeSiegmöglichkeit();
                         if(siegLiegtVor == true)
                         {
+                            DebugNachricht("DEBUG: Bot hat Siegmöglichkeit für sich in Feld [" + zeile + "," + spalte + "] erkannt.");
                             SiegDesBots();
                         }
                         else
@@ -431,6 +435,9 @@ namespace TicTacToeMitBot
                 }
                 
             }
+
+            DebugNachricht("DEBUG: Bot konnte im aktuellen Zug keine Siegmöglichkeit für sich finden" +
+                "\n       Es wird nun geschaut ob ein Sieg des Gegenspielers im nächsten Zug möglich ist, um diesen zu verhindern.");
 
             //2. Wenn 1. nicht erfolgreich wird hier geprüft, ob der Gegenspieler im nächsten Zug gewinnen könnte:
             //Wenn ja wird in das entsprechende Feld vom Bot das BotSymbol gesetzt, um den Sieg des Nutzers im nächsten Zug verhindern
@@ -445,6 +452,9 @@ namespace TicTacToeMitBot
                         PruefeSiegmöglichkeit();
                         if (siegLiegtVor == true)
                         {
+                            DebugNachricht("DEBUG: Bot hat Siegmöglichkeit des Gegenspielers im nächsten Zug gefunden \n" +
+                         "       Deshalb setzt dieser nun in Feld [" + zeile + "," + spalte + "] sein Zeichen, um den Sieg zu verhindern.");
+
                             felder[spalte, zeile] = botSymbol;
                             return;
                         }
@@ -457,8 +467,12 @@ namespace TicTacToeMitBot
 
             }
 
-            // 3.
+            // 3. Wenn 1. und 2. nicht erfolgreich, dann wird hier nun das Botsymbol in ein zufälliges freies Feld gesetzt:
 
+
+            DebugNachricht("DEBUG: Bot hat weder eine Siegmöglichkeit für sich im aktuellen Zug, noch eine für den\n" +
+                        "       Gegenspieler im nächsten Zug gefunden. Deshalb wird nun ein Zeichen in ein zufälliges freies Feld gesetzt");
+            ZeichenInZufaelligesFreiesFeld();
 
         }
 
@@ -469,13 +483,21 @@ namespace TicTacToeMitBot
             Random myObject2 = new Random();
             int ranNum2 = myObject2.Next(-1, 3);
 
+            DebugNachricht("DEBUG: Es wurde Feld [" + ranNum1 + "," + ranNum2 + "]gewählt. Nun wird geprüft ob dieses leer ist...");
+
             if (felder[ranNum1, ranNum2] == " ")
             {
                 felder[ranNum1, ranNum2] = botSymbol;
+                DebugNachricht("DEBUG: Das gewählte Feld ist frei und das BotSymbol wurde dort hinein gesetzt.");
+                return;
+            }
+            else
+            {
+                DebugNachricht("DEBUG: Das gewählte Feld scheint voll zu sein. Es wird ein neues Feld ausprobiert:");
+                ZeichenInZufaelligesFreiesFeld();
             }
 
-
-            ZeichenInZufaelligesFreiesFeld();
+            
         } //setzt das Zeichen des Bots in zufälliges freies Feld, wenn oben aufgführte Methoden erfolglos sind
 
         static void UeberlegeSimulation()//sorgt für die Verzoegerung, wenn der Bot dran ist
@@ -498,17 +520,12 @@ namespace TicTacToeMitBot
             Console.WriteLine("║                                                                                           ║");
         }
 
-
+        static void DebugNachricht(string nachricht)
+        {
+            Console.WriteLine(nachricht);
+        }
 
     }
-
-        
-
-        
-
-        
-
-
 
 }
 
