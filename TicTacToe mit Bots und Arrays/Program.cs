@@ -17,7 +17,7 @@ namespace TicTacToeMitBot
 
         static string botSymbol;
 
-        static bool siegLiegtVor;
+        static bool siegLiegtVor; //quasi ein Rückgabewert für die Funktion PruefeSiegmoeglichkeit
 
         static int spielZugAnzahl = 0;
 
