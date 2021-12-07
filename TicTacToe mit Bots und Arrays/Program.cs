@@ -452,8 +452,6 @@ namespace TicTacToeMitBot
             //2. Wenn 1. nicht erfolgreich wird hier geprüft, ob der Gegenspieler im nächsten Zug gewinnen könnte:
             //Wenn ja wird in das entsprechende Feld vom Bot das BotSymbol gesetzt, um den Sieg des Nutzers im nächsten Zug verhindern
 
-            DebugNachricht("DEBUG: Es wird nun testweise in jedes Feld das Gegnersymbol gesetzt\n" +
-                "       und anschließend geprüft ob eine Siegmöglichkeit vorliegt.");
 
             for (int zeile = 0; zeile <= 2; zeile++)
             {
@@ -465,7 +463,7 @@ namespace TicTacToeMitBot
                         PruefeSiegmoeglichkeit();
                         if (siegLiegtVor == true)
                         {
-                            DebugNachricht("DEBUG: Bot hat Siegmöglichkeit des Gegenspielers im nächsten Zug gefunden \n" +
+                            DebugNachricht("DEBUG: Der Bot hat Siegmöglichkeit des Gegenspielers im nächsten Zug gefunden \n" +
                          "       Deshalb setzt dieser nun in Feld [" + zeile + "," + spalte + "] sein Zeichen, um den Sieg zu verhindern.");
 
                             felder[spalte, zeile] = botSymbol;
@@ -483,8 +481,8 @@ namespace TicTacToeMitBot
             // 3. Wenn 1. und 2. nicht erfolgreich, dann wird hier nun das Botsymbol in ein zufälliges freies Feld gesetzt:
 
 
-            DebugNachricht("DEBUG: Bot hat weder eine Siegmöglichkeit für sich im aktuellen Zug, noch eine für den\n" +
-                        "       Gegenspieler im nächsten Zug gefunden. Deshalb wird nun ein Zeichen in ein zufälliges freies Feld gesetzt");
+            DebugNachricht("DEBUG: Der Bot hat weder eine Siegmöglichkeit für sich im aktuellen Zug, noch eine für den\n" +
+                        "       Gegenspieler im nächsten Zug gefunden. Deshalb wird nun ein Zeichen in ein zufälliges freies Feld gesetzt.");
             ZeichenInZufaelligesFreiesFeld();
 
         }
