@@ -247,128 +247,31 @@ namespace TicTacToeMitBot
         static void ZugDesSpielers() //liest die Einbabe der Spielers in die Konsole aus, wenn dieser dran ist
         {
             string input = Console.ReadLine();
-            switch (input)
+
+            int number;
+            if (!Int32.TryParse(input, out number) || number < 1 || number > 9)
             {
-                case "1":
-                    if (felder[0, 0] == " ")
-                    {
-                        felder[0, 0] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-                case "2":
-                    if (felder[0, 1] == " ")
-                    {
-                        felder[0, 1] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-                case "3":
-                    if (felder[0, 2] == " ")
-                    {
-                        felder[0, 2] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-                case "4":
-                    if (felder[1, 0] == " ")
-                    {
-                        felder[1, 0] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-                case "5":
-                    if (felder[1, 1] == " ")
-                    {
-                        felder[1, 1] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-                case "6":
-                    if (felder[1, 2] == " ")
-                    {
-                        felder[1, 2] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-                case "7":
-                    if (felder[2, 0] == " ")
-                    {
-                        felder[2, 0] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-                case "8":
-                    if (felder[2, 1] == " ")
-                    {
-                        felder[2, 1] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-                case "9":
-                    if (felder[2, 2] == " ")
-                    {
-                        felder[2, 2] = spielerSymbol;
-                        break;
-                    }
-                    else
-                    {
-                        FeldIstVoll();
-                        break;
-                    }
-
-
-
-                default:
-
-
-                    Console.WriteLine("╠═══════════════════════════════════════════════════════════════════════════════════════════╣");
-                    Console.WriteLine("║Hmm - Das war aber keine Zahl von 1-9!                                                     ║");
-                    Console.WriteLine("║Versuche es noch einmal und lerne schreiben!                                               ║");
-                    Console.WriteLine("╠═══════════════════════════════════════════════════════════════════════════════════════════╣");
-                    ZugDesSpielers();
-                    break;
+                Console.WriteLine("╠═══════════════════════════════════════════════════════════════════════════════════════════╣");
+                Console.WriteLine("║Hmm - Das war aber keine Zahl von 1-9!                                                     ║");
+                Console.WriteLine("║Versuche es noch einmal und lerne schreiben!                                               ║");
+                Console.WriteLine("╠═══════════════════════════════════════════════════════════════════════════════════════════╣");
+                ZugDesSpielers();
             }
+            else
+            {
+                number -= 1;
+                int row = number / 3;
+                int column = number % 3;
+                if (felder[row, column] == " ")
+                {
+                    felder[row, column] = spielerSymbol;
+                }
+                else
+                {
+                    FeldIstVoll();
+                }
+            }
+            
         }
 
         static void SiegDesSpielers() //Konsolenausgabe, wenn Spieler gewinnt
